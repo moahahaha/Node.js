@@ -1,4 +1,8 @@
+document.addEventListener('DOMContentLoaded', load_message())
 
+var loadInterval,
+
+loadInterval = setInterval(load_message, 1000)
 
 function add_message(){
     console.log("clicked send button")
@@ -22,7 +26,25 @@ function add_message(){
             alert(data.message) 
         }
        
-        load_messange()
+        load_message() 
+        
     });
 }
 
+function load_message() {
+    fetch('/load')
+        .then(res => res.json())
+        .then(data => {
+            var EL_p = document.getElementById('text_p')
+            console.log(data.liste)
+            EL_p.innerHTML = ''
+            data.liste.forEach((message) => {
+                var p = document.createElement('p')
+                p.textContent = message
+                console.log(message)
+
+                EL_p.appendChild(p)
+            });
+
+        })
+}
