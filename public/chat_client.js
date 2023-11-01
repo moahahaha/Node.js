@@ -30,7 +30,7 @@ function add_message(){
         
     });
 }
-
+                        
 function load_message() {
     fetch('/load')
         .then(res => res.json())

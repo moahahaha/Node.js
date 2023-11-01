@@ -12,7 +12,6 @@ var users = [
 
 var messages = ["Hei", "Hallo", "Heisan"]
 
-
 app.use(express.static('public'))
 app.use(express.json())
 app.use(sessions({
@@ -75,7 +74,7 @@ app.post('/login', (req,res) =>  {
 
         // (if) Sammenlign passord som er submittet fra client med passord i user. user.password
         session = req.session
-        session.username = // brukernavn fra client
+        session.username = 
 
         //da kan vi senere bruke:::
         req.session.username
