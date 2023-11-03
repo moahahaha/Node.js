@@ -13,6 +13,7 @@ var users = [
 var messages = ["Hei", "Hallo", "Heisan"]
 
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(sessions({
     secret: "thisisasecretkey",
@@ -54,7 +55,6 @@ app.get('/load', (req, res) =>  {
     console.log('sendt messages')
     res.json({liste: messages})
 })
-
 
 
 app.listen(PORT, (error) =>{ 

@@ -48,3 +48,5 @@ function load_message() {
 
         })
 }
+
+
