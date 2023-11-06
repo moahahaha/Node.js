@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel ="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <h1>Chat</h1>
-    <p id="text_p"></p>
-    
-    <input type="text" placeholder = "Write something" id="text_input">
-    <button onclick="add_message()" id="">Send</button>
+    <div class="big_div">
+        <h1>Chat</h1>
+        <p id="text_p"></p>
+        
+        <div class="input_div">
+            <input type="text" placeholder = "Write something" class="message_input" id="text_input">
+            <button onclick="add_message()" id="" class="send_button">Send</button>
+        </div>
+
+        <br></br>
+
+        <div class="login_div">
+            <a href="login.html">
+                <button class="login_button">Login</button>
+            </a>
+        </div>
+    </div>
     <script src="chat_client.js"></script>
-    <br></br>
-    <a href="login.html">
-        <button>Log in</button>
-    </a>
 </body>
 </html>

@@ -6,8 +6,8 @@ const PORT = 8080
 const oneHour = 1000 * 60 * 60
 
 var users = [
-    {username: "Ida", password: "Passord1"},
-    {username: "Bob", password: "Passord2"}
+    {username: "ida", password: "Passord1"},
+    {username: "bob", password: "Passord2"}
 ]
 
 var messages = ["Hei", "Hallo", "Heisan"]
@@ -28,8 +28,8 @@ app.get('/', function (req, res) {
 	console.log("/ requested")
     res.sendFile(path.join(__dirname, 'public', 'index.html'))  
     session = req.session
-    if (session.username) {
-        res.sendFile(path.join(__dirname, 'public', 'login.html'))
+    if (session.username ) {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'))
     } else {
         res.sendFile(path.join(__dirname, 'public', 'login.html'))
     }
@@ -68,14 +68,21 @@ app.listen(PORT, (error) =>{
 app.post('/login', (req,res) =>  {
     console.log(req.body.username)
     console.log(req.body.password)
-
+   
         //Find user, velg bruker som har det brukernavnet som ble sendt fra client.
         var user = users.find(u => u.username === req.body.username)
 
         // (if) Sammenlign passord som er submittet fra client med passord i user. user.password
+        if(user && req.body.password == user.password) {
+            
+        console.log("riktig passord") 
         session = req.session
-        session.username = 
+        session.username =
 
         //da kan vi senere bruke:::
         req.session.username
+        }
+       
+
+
 })

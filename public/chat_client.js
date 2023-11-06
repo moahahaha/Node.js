@@ -49,4 +49,3 @@ function load_message() {
         })
 }
 
-
