@@ -4,6 +4,13 @@ var loadInterval,
 
 loadInterval = setInterval(load_message, 1000)
 
+document.addEventListener('DOMContentLoaded', () => {
+    load_message();
+    getUsername();
+    
+});
+
+
 function add_message(){
     console.log("clicked send button")
     const text_field = document.getElementById('text_field')
@@ -27,7 +34,7 @@ function add_message(){
         }
        
         load_message() 
-        
+        getUsername();
     });
 }
                         
@@ -49,3 +56,16 @@ function load_message() {
         })
 }
 
+
+function getUsername() {
+    fetch('/getUsername')
+        .then((res) => res.json())
+        .then((data) => {
+            const usernameP = document.getElementById('brukernavn_p');
+            if (data.username) {
+                usernameP.textContent = `Logged in as: ${data.username}`;
+            } else {
+                usernameP.textContent = 'Not logged in';
+            }
+        });
+}

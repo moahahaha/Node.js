@@ -7,7 +7,8 @@ const oneHour = 1000 * 60 * 60
 
 var users = [
     {username: "ida", password: "Passord1"},
-    {username: "bob", password: "Passord2"}
+    {username: "bob", password: "Passord2"},
+    {username: "test", password: "test"}
 ]
 
 var messages = ["Hei", "Hallo", "Heisan"]
@@ -33,6 +34,7 @@ app.get('/', function (req, res) {
     } else {
         res.sendFile(path.join(__dirname, 'public', 'login.html'))
     }
+    res.end()
 });
 
 
@@ -65,6 +67,11 @@ app.listen(PORT, (error) =>{
     } 
 );
 
+app.get('/getUsername', (req, res) => {
+    res.json({ username: req.session.username });
+});
+
+
 app.post('/login', (req,res) =>  {
     console.log(req.body.username)
     console.log(req.body.password)
@@ -75,14 +82,15 @@ app.post('/login', (req,res) =>  {
         // (if) Sammenlign passord som er submittet fra client med passord i user. user.password
         if(user && req.body.password == user.password) {
             
-        console.log("riktig passord") 
-        session = req.session
-        session.username =
+            console.log("riktig passord") 
+        
+            req.session.username= user.username
+            //send til index.html
+            res.redirect('/');
 
-        //da kan vi senere bruke:::
-        req.session.username
-        }
-       
-
+    } else { //hvorfor skjer dette uansett..?
+        // Respons, feil brukernavn eller passord
+        res.json({message: "Invalid username or password" });
+    }
 
 })

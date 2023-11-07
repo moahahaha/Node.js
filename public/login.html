@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel ="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="big_div">
 
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        <input type="text" name="username" id="username">
-        <input type="password" name="password" id="password">
-        <button type="sumbit" name="button" id="login_button">login</button>
-    </form>
+        <div class="heading_div">
+            <h1>Login</h1>
+        </div>
+
+        <div class="login_input_div">
+            <form action="/login" method="post">
+                <input type="text" placeholder="username" name="username..." id="username">
+                <input type="password" placeholder="password..." name="password" id="password">
+                <button type="sumbit" name="button" id="login_button">login</button>
+            </form>
+        </div>
+
+        <p id="wrong_p"></p>
+
+    </div>
     
    
 </body>
