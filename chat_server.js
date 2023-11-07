@@ -11,7 +11,7 @@ var users = [
     {username: "test", password: "test"}
 ]
 
-var messages = ["Hei", "Hallo", "Heisan"]
+var messages = [""]
 
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
