@@ -7,6 +7,7 @@ loadInterval = setInterval(load_message, 1000)
 document.addEventListener('DOMContentLoaded', () => {
     load_message();
     getUsername();
+    update_button();
     
 });
 
@@ -15,7 +16,9 @@ function add_message(){
     console.log("clicked send button")
     const text_field = document.getElementById('text_field')
     const text = document.getElementById('text_input').value;
+
     console.log(text)
+
     fetch('/add', {
         method: 'POST',
         headers: {
@@ -24,8 +27,8 @@ function add_message(){
         body: JSON.stringify({ text: text })
     })
 
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
         if (data.success) {
             console.log("text added")
         } else {
@@ -56,7 +59,6 @@ function load_message() {
         })
 }
 
-
 function getUsername() {
     fetch('/getUsername')
         .then((res) => res.json())
@@ -68,4 +70,27 @@ function getUsername() {
                 usernameP.textContent = 'Not logged in';
             }
         });
+}
+
+
+function update_button() {
+    fetch('/getUsername')
+    .then((res) => res.json())
+        .then((data) => {
+            const loginButton = document.getElementById('login_button');
+
+            if (data.username) {
+                
+                loginButton.textContent = 'Log out';
+            } else {
+                loginButton.textContent = 'Login'
+            }
+        })
+}
+
+function logOut() {
+    fetch('/logout')
+        .then(() => {
+            update_button()
+        })
 }

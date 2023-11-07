@@ -42,13 +42,19 @@ app.post('/add', (req, res) => {
     var text = req.body.text;
     console.log(text);
 
-    if (text){
-         messages.push(text);
-        res.json({ success: true})
-        console.log("message added")
-        console.log(messages)
+    if (text) {
+        var username = req.session.username;
+
+        if (username){
+            messages.push(username + ": " + text);
+            res.json({ success: true})
+            console.log("message added")
+            console.log(messages)
+        } else {
+            res.json({ success: false, message: "Not logged in"})
+        }
     } else {
-        res.json({ success: false, message: "No message sent"})
+        res.json({ success: false, message: "No message sendt"})
     }
 });
 
@@ -82,7 +88,7 @@ app.post('/login', (req,res) =>  {
         // (if) Sammenlign passord som er submittet fra client med passord i user. user.password
         if(user && req.body.password == user.password) {
             
-            console.log("riktig passord") 
+            console.log("riktig passord")      
         
             req.session.username= user.username
             //send til index.html
@@ -93,4 +99,14 @@ app.post('/login', (req,res) =>  {
         res.json({message: "Invalid username or password" });
     }
 
+})
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) =>{
+        if (err) {
+            console.error('Error when logging out:', err);
+            res.sendStatus(500);
+        }
+        res.sendStatus(200);
+    })
 })
