@@ -5,13 +5,15 @@ const app = express();
 const PORT = 8080
 const oneHour = 1000 * 60 * 60
 
+
+var session;
 var users = [
     {username: "ida", password: "Passord1"},
     {username: "bob", password: "Passord2"},
     {username: "test", password: "test"}
 ]
 
-var messages = [""]
+var messages = ["kurt: Hallo", "bob: Hei", "kurt: Hahaha"]
 
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
@@ -25,18 +27,18 @@ app.use(sessions({
     resave: false
 }))
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
 	console.log("/ requested")
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))  
+    //res.sendFile(path.join(__dirname, 'public', 'chat.html'))  
+
     session = req.session
     if (session.username ) {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'))
+        res.sendFile(path.join(__dirname, 'public', 'chat.html'))
     } else {
         res.sendFile(path.join(__dirname, 'public', 'login.html'))
     }
-    res.end()
+   // res.end()
 });
-
 
 app.post('/add', (req, res) => {
     var text = req.body.text;
@@ -91,11 +93,12 @@ app.post('/login', (req,res) =>  {
             console.log("riktig passord")      
         
             req.session.username= user.username
-            //send til index.html
+            //send til chat.html
             res.redirect('/');
 
-    } else { //hvorfor skjer dette uansett..?
+    } else {
         // Respons, feil brukernavn eller passord
+        
         res.json({message: "Invalid username or password" });
     }
 

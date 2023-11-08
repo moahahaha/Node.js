@@ -9,9 +9,12 @@
 <body>
     <div class="big_div">
         <p id="brukernavn_p"></p>
-        <h1>Chat</h1>
-        <p id="text_p"></p>
-        
+        <h1>Chat  </h1>
+
+        <div style="overflow-y:scroll;" class="message_div">
+            <p id="text_p"></p>
+        </div>
+
         <div class="input_div">
             <input type="text" placeholder = "Write something" class="message_input" id="text_input">
             <button onclick="add_message()" id="" class="send_button">Send</button>
